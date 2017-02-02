@@ -303,7 +303,10 @@ if ps ax | grep -v grep | grep Kafka > /dev/null
 then
     echo -e " JARVIS: Kafka message broker ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Kafka  | grep -v grep | awk '{ print $2 }'`
-    echo " $PID"
+
+    echo " PID :$PID "
+
+    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
 else
     echo -e " JARVIS: Kafka message broker ${RED}DOWN${NC}"
 
@@ -315,7 +318,10 @@ if ps ax | grep -v grep | grep zookeeper.properties > /dev/null
 then
     echo -e " JARVIS: Elasticsearch manager Zookeeper ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep zookeeper.properties | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+    echo " PID :$PID "
+
+    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
+
 else
     echo -e " JARVIS: Elasticsearch manager Zookeeper ${RED}DOWN${NC}"
 
@@ -327,7 +333,9 @@ if ps ax | grep -v grep | grep apache-tomcat > /dev/null
 then
     echo -e " JARVIS: Apache Tomcat ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep apache-tomcat  | grep -v grep | awk '{ print $2 }'`
-    echo " $PID"
+    echo " PID :$PID "
+
+    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
 else
     echo -e " JARVIS: Apache Tomcat ${RED}DOWN${NC}"
 
@@ -339,7 +347,7 @@ if ps ax | grep -v grep | grep Elasticsearch > /dev/null
 then
     echo -e " JARVIS: Elasticsearch ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Elasticsearch  | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+    echo " PID :$PID"
 else
     echo -e " JARVIS: Elasticsearch ${RED}DOWN${NC}"
 
@@ -351,7 +359,8 @@ if ps ax | grep -v grep | grep dxc-logstash-jarvis.conf > /dev/null
 then
     echo -e " JARVIS: Logstash ${GREEN}RUNNING${NC} using dxc-logstash-jarvis.conf"
     PID=`ps -ef  | grep dxc-logstash-jarvis.conf  | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+   echo " PID :$PID"
+
 else
     echo -e " JARVIS: Logstash ${RED}DOWN${NC}"
 
@@ -362,7 +371,8 @@ if ps ax | grep -v grep | grep dxc-apm-logstash.conf > /dev/null
 then
     echo -e " APM: Logstash ${GREEN}RUNNING${NC} using dxc-apm-logstash.conf"
     PID=`ps -ef  | grep dxc-apm-logstash.conf  | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+   echo "PID :$PID"
+
 else
     echo -e " APM: Logstash ${RED}DOWN${NC} or not installed"
 
@@ -375,7 +385,7 @@ if ps ax | grep -v grep | grep indexer > /dev/null
 then
     echo -e " JARVIS: Indexer ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep indexer  | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+   echo " PIDS: $PID"
 else
     echo -e " JARVIS: Indexer ${RED}DOWN${NC}"
 
@@ -388,7 +398,7 @@ if ps ax | grep -v grep | grep verifier > /dev/null
 then
     echo -e " JARVIS: Verifier ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep verifier  | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+   echo " PIDS: $PID"
 else
     echo -e " JARVIS: Verifier ${RED}DOWN${NC}"
 
@@ -398,31 +408,42 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep apache-tomee > /dev/null
 then
-    echo " AXA: App server ${GREEN}RUNNING${NC}"
+    echo -e " AXA: App server Apache-tomee  ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep apache-tomee  | grep -v grep | awk '{ print $2 }'`
-    echo " $PID"
-else
-    echo -e " AXA: App server ${RED}DOWN${NC}"
+
+
+echo " PID :$PID "
+
+    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
+else    
+echo -e " AXA: App server Apache-tomee ${RED}DOWN${NC}"
 
 fi
 echo '-----------------------------------------------------------'
+
+
 
 if ps ax | grep -v grep | grep DigitalExperienceCollector  > /dev/null
 then
     echo -e " AXA: DxC Collector ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep DigitalExperienceCollector  | grep -v grep | awk '{ print $2 }'`
-    echo " $PID"
+    echo " PID :$PID "
+
+    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
 else
     echo -e " AXA: DxC Collector ${RED}DOWN${NC}"
 
 fi
 echo '-----------------------------------------------------------'
 
+
+
 if ps ax | grep -v grep | grep mdo-aggregator > /dev/null
 then
     echo -e " AXA: Aggregator ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep mdo-aggregator  | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+   echo " PID :$PID"
+
 else
     echo -e " AXA: Aggregator ${RED}DOWN${NC}"
 
@@ -435,7 +456,8 @@ if ps ax | grep -v grep | grep Dlog4j > /dev/null
 then
     echo -e " Logger Dlog4j ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Dlog4j  | grep -v grep | awk '{ print $2 }'`
-   echo " $PID"
+   echo " PIDS: $PID"
+
 else
     echo -e " Logger Dlog4j ${RED}DOWN${NC}"
 
@@ -447,7 +469,7 @@ if ps ax | grep -v grep | grep logcollector > /dev/null
 then
     echo -e " LA: Log Collector ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep logcollector  | grep -v grep | awk '{ print $2 }'`
- echo " $PID"
+ echo " PID :$PID"
 else
     echo -e " LA: Log Collector ${RED}DOWN${NC}"
 
@@ -460,7 +482,7 @@ if ps ax | grep -v grep | grep logparser > /dev/null
 then
     echo -e " LA: Log Parser ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep logparser  | grep -v grep | awk '{ print $2 }'`
- echo " $PID"
+ echo " PID :$PID"
 else
     echo -e " LA: Log Parser ${RED}DOWN${NC}"
 
@@ -468,11 +490,13 @@ fi
 
 echo '-----------------------------------------------------------'
 
-if ps ax | grep -v grep | grep pgsql > /dev/null
+#if ps ax | grep -v grep | grep pgsql > /dev/null
+if ss -l -n |grep PGSQL > /dev/null
 then
     echo -e " DB: Postgres ${GREEN}RUNNING${NC}"
-    PID=`ps -ef  | grep pgsql  | grep -v grep | awk '{ print $2 }'`
- echo " $PID"
+ #   PID=`ps -ef  | grep pgsql  | grep -v grep | awk '{ print $2 }'`
+# echo " $PID"
+#echo `netstat -pl | grep $PID | grep 'PGSQL.[0-9][0-9][0-9][0-9]'`
 else
     echo -e " DB: Postgres ${RED}DOWN${NC} or not installed"
 
@@ -483,7 +507,8 @@ if ps ax | grep -v grep | grep oracle > /dev/null
 then
     echo -e " DB: Oracle ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep $ORACLE_HOME  | grep -v grep | awk '{ print $2 }'`
- echo " $PID"
+ echo "PID: $PID"
+echo `netstat -pl | grep $PID | grep ':[0-9][0-9][0-9][0-9]'`
 else
     echo -e " DB: Oracle ${RED}DOWN${NC} or not installed"
 
@@ -1300,6 +1325,7 @@ case $1 in
   Start|Stop|Status|Aggregator|Apache-tomee|Apache-tomcat|DxC|Logstash|Kafka|Zookeeper|Elasticsearch|Verifier|Indexer|Logcollector|Logparser) $1;;
   *) echo "Run as $0 <Start | Stop | Status | Aggregator | Apache-tomee | Apache-tomcat | DxC | Logstash | Kafka | Zookeeper | Elasticsearch | Verifier | Indexer | Logcollector | Logparser>"; exit 1;
 esac
+
 
 
 
