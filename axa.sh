@@ -282,8 +282,18 @@ echo "----------------- Execution of AXA stop Finished ----------------- \n"
 
 }
 
-Status() {
+###################################################################
+# 
+# Check and display the status of all services
+#
+##################################################################
 
+Status() {
+PID=
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
 
 echo '--------------- Status of AXA services ---------------------'
 echo
@@ -291,11 +301,11 @@ echo
 
 if ps ax | grep -v grep | grep Kafka > /dev/null
 then
-    echo "JARVIS: Kafka message broker service RUNNING"
+    echo -e " JARVIS: Kafka message broker ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Kafka  | grep -v grep | awk '{ print $2 }'`
-    echo $PID
+    echo " $PID"
 else
-    echo "JARVIS: Kafka message broker DOWN"
+    echo -e " JARVIS: Kafka message broker ${RED}DOWN${NC}"
 
 fi
 echo '-----------------------------------------------------------'
@@ -303,12 +313,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep zookeeper.properties > /dev/null
 then
-    echo "JARVIS: Elasticsearch manager Zookeeper RUNNING"
+    echo -e " JARVIS: Elasticsearch manager Zookeeper ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep zookeeper.properties | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "   
-   echo $PID
+   echo " $PID"
 else
-    echo "JARVIS: Elasticsearch manager Zookeeper DOWN"
+    echo -e " JARVIS: Elasticsearch manager Zookeeper ${RED}DOWN${NC}"
 
 fi
 
@@ -316,12 +325,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep apache-tomcat > /dev/null
 then
-    echo "JARVIS: Apache Tomcat RUNNING"
+    echo -e " JARVIS: Apache Tomcat ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep apache-tomcat  | grep -v grep | awk '{ print $2 }'`
-    echo "PIDS: "    
-    echo $PID
+    echo " $PID"
 else
-    echo "JARVIS: Apache Tomcat DOWN"
+    echo -e " JARVIS: Apache Tomcat ${RED}DOWN${NC}"
 
 fi
 
@@ -329,12 +337,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep Elasticsearch > /dev/null
 then
-    echo "JARVIS: Elasticsearch RUNNING"
+    echo -e " JARVIS: Elasticsearch ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Elasticsearch  | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "    
-   echo $PID
+   echo " $PID"
 else
-    echo "JARVIS: Elasticsearch DOWN"
+    echo -e " JARVIS: Elasticsearch ${RED}DOWN${NC}"
 
 fi
 
@@ -342,24 +349,22 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep dxc-logstash-jarvis.conf > /dev/null
 then
-    echo "JARVIS: Logstash RUNNING using dxc-logstash-jarvis.conf"
+    echo -e " JARVIS: Logstash ${GREEN}RUNNING${NC} using dxc-logstash-jarvis.conf"
     PID=`ps -ef  | grep dxc-logstash-jarvis.conf  | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "   
-   echo $PID
+   echo " $PID"
 else
-    echo "JARVIS: Logstash DOWN"
+    echo -e " JARVIS: Logstash ${RED}DOWN${NC}"
 
 fi
 
 
 if ps ax | grep -v grep | grep dxc-apm-logstash.conf > /dev/null
 then
-    echo "APM: Logstash RUNNING using dxc-apm-logstash.conf"
+    echo -e " APM: Logstash ${GREEN}RUNNING${NC} using dxc-apm-logstash.conf"
     PID=`ps -ef  | grep dxc-apm-logstash.conf  | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "   
-   echo $PID
+   echo " $PID"
 else
-    echo "APM: Logstash DOWN or not installed"
+    echo -e " APM: Logstash ${RED}DOWN${NC} or not installed"
 
 fi
 
@@ -368,12 +373,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep indexer > /dev/null
 then
-    echo "JARVIS: Indexer RUNNING"
+    echo -e " JARVIS: Indexer ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep indexer  | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "   
-   echo $PID
+   echo " $PID"
 else
-    echo "JARVIS: Indexer DOWN"
+    echo -e " JARVIS: Indexer ${RED}DOWN${NC}"
 
 fi
 
@@ -382,12 +386,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep verifier > /dev/null
 then
-    echo "JARVIS: Verifier RUNNING"
+    echo -e " JARVIS: Verifier ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep verifier  | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "   
-   echo $PID
+   echo " $PID"
 else
-    echo "JARVIS: Verifier DOWN"
+    echo -e " JARVIS: Verifier ${RED}DOWN${NC}"
 
 fi
 
@@ -395,36 +398,33 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep apache-tomee > /dev/null
 then
-    echo "AXA: App server RUNNING"
+    echo " AXA: App server ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep apache-tomee  | grep -v grep | awk '{ print $2 }'`
-    echo "PIDS: "
-    echo $PID
+    echo " $PID"
 else
-    echo "AXA: App server DOWN"
+    echo -e " AXA: App server ${RED}DOWN${NC}"
 
 fi
 echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep DigitalExperienceCollector  > /dev/null
 then
-    echo "AXA: DxC Collector service RUNNING"
+    echo -e " AXA: DxC Collector ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep DigitalExperienceCollector  | grep -v grep | awk '{ print $2 }'`
-    echo "PIDS: "
-        echo $PID
+    echo " $PID"
 else
-    echo "AXA: DxC Collector DOWN "
+    echo -e " AXA: DxC Collector ${RED}DOWN${NC}"
 
 fi
 echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep mdo-aggregator > /dev/null
 then
-    echo "AXA: Aggregator RUNNING"
+    echo -e " AXA: Aggregator ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep mdo-aggregator  | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "
-   echo $PID
+   echo " $PID"
 else
-    echo "AXA: Aggregator DOWN"
+    echo -e " AXA: Aggregator ${RED}DOWN${NC}"
 
 fi
 
@@ -433,12 +433,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep Dlog4j > /dev/null
 then
-    echo "Logger Dlog4j RUNNING"
+    echo -e " Logger Dlog4j ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Dlog4j  | grep -v grep | awk '{ print $2 }'`
-   echo "PIDS: "   
-   echo $PID
+   echo " $PID"
 else
-    echo "Logger Dlog4j DOWN"
+    echo -e " Logger Dlog4j ${RED}DOWN${NC}"
 
 fi
 
@@ -446,12 +445,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep logcollector > /dev/null
 then
-    echo "LA: Log Collector  RUNNING"
+    echo -e " LA: Log Collector ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep logcollector  | grep -v grep | awk '{ print $2 }'`
- echo "PIDS: "   
- echo $PID
+ echo " $PID"
 else
-    echo "LA: Log Collector DOWN"
+    echo -e " LA: Log Collector ${RED}DOWN${NC}"
 
 fi
 
@@ -460,12 +458,11 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep logparser > /dev/null
 then
-    echo "LA: Log Parser RUNNING"
+    echo -e " LA: Log Parser ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep logparser  | grep -v grep | awk '{ print $2 }'`
- echo "PIDS: "    
-echo $PID
+ echo " $PID"
 else
-    echo "LA: Log Parser DOWN"
+    echo -e " LA: Log Parser ${RED}DOWN${NC}"
 
 fi
 
@@ -473,33 +470,31 @@ echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep pgsql > /dev/null
 then
-    echo "DB: Postgres  RUNNING"
+    echo -e " DB: Postgres ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep pgsql  | grep -v grep | awk '{ print $2 }'`
- echo "PIDS: "
-echo $PID
+ echo " $PID"
 else
-    echo "DB: Postgres DOWN or not installed"
+    echo -e " DB: Postgres ${RED}DOWN${NC} or not installed"
 
 fi
 echo
 
 if ps ax | grep -v grep | grep oracle > /dev/null
 then
-    echo "DB: Oracle RUNNING"
+    echo -e " DB: Oracle ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep $ORACLE_HOME  | grep -v grep | awk '{ print $2 }'`
- echo "PIDS: "
-echo $PID
+ echo " $PID"
 else
-    echo "DB: Oracle DOWN or not installed"
+    echo -e " DB: Oracle ${RED}DOWN${NC} or not installed"
 
 fi
 echo '-----------------------------------------------------------'
 
 if ps ax | grep -v grep | grep java > /dev/null
 then
-    echo "Java processes running. JAVA_HOME: $JAVA_HOME"
+    echo " Java processes running. JAVA_HOME: $JAVA_HOME"
 else
-    echo "No java processes running"
+    echo " No java processes running"
 
 fi
 
@@ -531,7 +526,7 @@ if ps ax | grep -v grep | grep mdo-aggregator > /dev/null
 then
     echo "Aggregator service RUNNING"
     PID=`ps -ef  | grep mdo-aggregator | grep -v grep | awk '{ print $2 }'`
-    echo "PIDS: "
+    echo " PIDS: "
         echo $PID
 else
     echo "mdo-aggregator DOWN"
@@ -583,7 +578,7 @@ fi
 
 
 Apache-tomcat() {
-
+PID=
 echo '--------------- Status of Jarvis Apache-tomcat services ---------------------'
 echo
 echo "This tomcat instance hosts Jarvis REST apis for data ingestion and onboarding"
@@ -609,7 +604,8 @@ case $yn in
         [Yy]* )
         
      if [ -z $PID ]; then
-	        echo '--------------- Starting Jarvis Apache Server ----------------------'
+
+echo '--------------- Starting Jarvis Apache Server ----------------------'
 		
       cd $CA_EMM_HOME/jarvis/apache-tomcat-8.0.30
         ./bin/startup.sh
@@ -643,7 +639,6 @@ fi
     esac
 
 }
-
 
 
 
@@ -710,6 +705,7 @@ fi
 }
 
 DxC() {
+
 PID=
 
 echo '--------------- Status of DxC services ---------------------'
