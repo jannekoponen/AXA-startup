@@ -294,7 +294,7 @@ PID=
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
-
+LBLUE='\033[1;36m'
 echo '--------------- Status of AXA services ---------------------'
 echo
 
@@ -303,10 +303,13 @@ if ps ax | grep -v grep | grep Kafka > /dev/null
 then
     echo -e " JARVIS: Kafka message broker ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Kafka  | grep -v grep | awk '{ print $2 }'`
-
+    PORT=`netstat -tulpn | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`
     echo " PID :$PID "
 
-    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
+    echo -e " ${LBLUE}PORTS LISTENING${NC} "
+    echo -e "${LBLUE}$PORT${NC}"
+
+
 else
     echo -e " JARVIS: Kafka message broker ${RED}DOWN${NC}"
 
@@ -318,9 +321,13 @@ if ps ax | grep -v grep | grep zookeeper.properties > /dev/null
 then
     echo -e " JARVIS: Elasticsearch manager Zookeeper ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep zookeeper.properties | grep -v grep | awk '{ print $2 }'`
+    PORT=`netstat -tulpn | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`
     echo " PID :$PID "
 
-    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
+
+    echo -e " ${LBLUE}PORTS LISTENING${NC} "
+    echo -e "${LBLUE}$PORT${NC}"
+
 
 else
     echo -e " JARVIS: Elasticsearch manager Zookeeper ${RED}DOWN${NC}"
@@ -333,9 +340,13 @@ if ps ax | grep -v grep | grep apache-tomcat > /dev/null
 then
     echo -e " JARVIS: Apache Tomcat ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep apache-tomcat  | grep -v grep | awk '{ print $2 }'`
+    PORT=`netstat -tulpn | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`
     echo " PID :$PID "
 
-    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
+    echo -e " ${LBLUE}PORTS LISTENING${NC} "
+    echo -e "${LBLUE}$PORT${NC}"
+
+
 else
     echo -e " JARVIS: Apache Tomcat ${RED}DOWN${NC}"
 
@@ -347,7 +358,13 @@ if ps ax | grep -v grep | grep Elasticsearch > /dev/null
 then
     echo -e " JARVIS: Elasticsearch ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep Elasticsearch  | grep -v grep | awk '{ print $2 }'`
-    echo " PID :$PID"
+    PORT=`netstat -tulpn | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`
+    echo " PID :$PID "
+
+    echo -e " ${LBLUE}PORTS LISTENING${NC} "
+    echo -e "${LBLUE}$PORT${NC}"
+
+
 else
     echo -e " JARVIS: Elasticsearch ${RED}DOWN${NC}"
 
@@ -410,11 +427,13 @@ if ps ax | grep -v grep | grep apache-tomee > /dev/null
 then
     echo -e " AXA: App server Apache-tomee  ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep apache-tomee  | grep -v grep | awk '{ print $2 }'`
+    PORT=`netstat -tulpn | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`
+    echo " PID :$PID "
+
+    echo -e " ${LBLUE}PORTS LISTENING${NC} "
+    echo -e "${LBLUE}$PORT${NC}"
 
 
-echo " PID :$PID "
-
-    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
 else    
 echo -e " AXA: App server Apache-tomee ${RED}DOWN${NC}"
 
@@ -427,9 +446,13 @@ if ps ax | grep -v grep | grep DigitalExperienceCollector  > /dev/null
 then
     echo -e " AXA: DxC Collector ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep DigitalExperienceCollector  | grep -v grep | awk '{ print $2 }'`
+    PORT=`netstat -tulpn | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`
     echo " PID :$PID "
 
-    echo " PORT `netstat -pl | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`"
+    echo -e " ${LBLUE}PORTS LISTENING${NC} "
+    echo -e "${LBLUE}$PORT${NC}"
+
+
 else
     echo -e " AXA: DxC Collector ${RED}DOWN${NC}"
 
@@ -442,7 +465,8 @@ if ps ax | grep -v grep | grep mdo-aggregator > /dev/null
 then
     echo -e " AXA: Aggregator ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep mdo-aggregator  | grep -v grep | awk '{ print $2 }'`
-   echo " PID :$PID"
+    echo " PID :$PID "
+
 
 else
     echo -e " AXA: Aggregator ${RED}DOWN${NC}"
@@ -469,7 +493,13 @@ if ps ax | grep -v grep | grep logcollector > /dev/null
 then
     echo -e " LA: Log Collector ${GREEN}RUNNING${NC}"
     PID=`ps -ef  | grep logcollector  | grep -v grep | awk '{ print $2 }'`
- echo " PID :$PID"
+    PORT=`netstat -tulpn | grep $PID | grep -o -P '(\:)[0-9]{1,5}'`
+    echo " PID :$PID "
+
+    echo -e " ${LBLUE}PORTS LISTENING${NC} "
+    echo -e "${LBLUE}$PORT${NC}"
+
+
 else
     echo -e " LA: Log Collector ${RED}DOWN${NC}"
 
